@@ -1,3 +1,8 @@
+import dotenv from "dotenv";
+dotenv.config({
+  path:"../.env",
+})
+
 import nodemailer from "nodemailer";
 import User from "../model/user.js";
 const Forgot = async (req, res) => {
@@ -24,8 +29,8 @@ const Forgot = async (req, res) => {
     var transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "sainibharat277@gmail.com",
-        pass: "zbto dmfy okep tmte",
+        user: process.env.USER_EMAIL,
+        pass: process.env.EMAIL_PASS,
       },
     });
 

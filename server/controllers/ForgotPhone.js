@@ -1,7 +1,11 @@
+import dotenv from "dotenv";
+dotenv.config({
+  path:"../.env",
+})
 import Twilio from "twilio";
 import User from "../model/user.js";
-const accountSid = "AC5e3071c96db6e2a1b41b7efc6b26ea79";
-const authToken = "265d8f3456639244d4f6c072b2a34639";
+const accountSid = process.env.USER_ACCOUNT_ID;
+const authToken = process.env.USER_ACCOUNT_PHONE;
 
 const ForgotPhone = async (req, res) => {
   let { phone } = req.body;
@@ -29,7 +33,7 @@ const ForgotPhone = async (req, res) => {
       .create({
         body: `your verify otp is ${randomNumber}`,
         to: `+91${newNumber}`, // Text your number
-        from: "+12562911119", // From a valid Twilio number
+        from: process.env.FROM_NUMBER, // From a valid Twilio number
       })
       .then((message) => console.log(message.sid));
 
